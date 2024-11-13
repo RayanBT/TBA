@@ -46,7 +46,7 @@ class Game:
         self.rooms.append(cours_de_magie)
         salle_commune = Room("salle_commune", "dans une grande salle avec plusieurs tables de banquet, tout au bout de la salle il y a la table des professeurs, des bougies flottant au plafond.")
         self.rooms.append(salle_commune)
-        couloir_etage_2 = Room("couloir_etage_2", "dans un couloir très large rempli de fenêtres avec une vue incontournable.")
+        couloir_etage_2 = Room("couloir_etage_2", "dans le couloir de l'étage 2, très large rempli de fenêtres avec une vue incontournable.")
         self.rooms.append(couloir_etage_2)
         cours_potion = Room("cours_potion", "dans une salle sombre avec plusieurs paillasses, possédant une marmite et des produits que vous ne connaissez pas.")
         self.rooms.append(cours_potion)
@@ -56,7 +56,7 @@ class Game:
         self.rooms.append(toilette)
         cours_animaux_magiques = Room("cours_animaux_magiques", "dans une salle plusieurs animaux en cage, et des squelettes autour de la salle.")
         self.rooms.append(cours_animaux_magiques)
-        couloir_etage_3 = Room("couloir_etage_3", "dans une tour avec un couloir très fin.")
+        couloir_etage_3 = Room("couloir_etage_3", "dans le vouloire de l'étage 3, une tour avec un couloir très fin.")
         self.rooms.append(couloir_etage_3)
         salle_commune_de_Poufsouffle = Room("salle_commune_de_Poufsouffle", "dans une pièce ovale avec plusieurs étagères remplies de livres.")
         self.rooms.append(salle_commune_de_Poufsouffle)
@@ -90,7 +90,7 @@ class Game:
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = swamp
+        self.player.current_room = entrée
 
     # Play the game
     def play(self):
