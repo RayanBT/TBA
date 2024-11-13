@@ -30,8 +30,8 @@ class Game:
         
         # Setup rooms
 
-        forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
-        self.rooms.append(forest)
+        entrée = Room("entrée", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
+        self.rooms.append(entrée)
         tower = Room("Tower", "dans une immense tour en pierre qui s'élève au dessus des nuages.")
         self.rooms.append(tower)
         cave = Room("Cave", "dans une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
@@ -45,7 +45,7 @@ class Game:
 
         # Create exits for rooms
 
-        forest.exits = {"N" : cave, "E" : tower, "S" : castle, "O" : None}
+        entrée.exits = {"N" : None, "E" : None, "S" : depot_afaire, "O" : jardin}
         tower.exits = {"N" : cottage, "E" : None, "S" : swamp, "O" : forest}
         cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
         cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
