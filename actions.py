@@ -137,3 +137,22 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+    
+    def back(game, list_of_words, number_of_parameters):
+        """
+        Permet au joueur de revenir à la salle précédente.
+
+        Args:
+            game (Game): L'objet du jeu.
+            list_of_words (list): La liste des mots dans la commande.
+            number_of_parameters (int): Le nombre de paramètres attendus par la commande.
+
+        Returns:
+            bool: True si la commande a été exécutée avec succès, False sinon.
+        """
+        if len(list_of_words) != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        return game.player.back()
