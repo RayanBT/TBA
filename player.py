@@ -58,7 +58,6 @@ class Player():
                 self.print_history()
                 return True
             else:
-                print(self.history)
                 print("\nVous ne pouvez pas revenir en arrière !\n")
                 return False
         except Exception as e:
