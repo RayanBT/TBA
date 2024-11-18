@@ -32,39 +32,39 @@ class Game:
         
         # Setup rooms
 
-        entrée = Room("entrée", "dans le couloire principale de l'ecole de poudlard.")
+        entrée = Room("entrée", "le couloire principale de l'ecole de poudlard.")
         self.rooms.append(entrée)
-        depot_affaire = Room("dépôt affaire", "dans la pièce remplie d'affaires d'étudiants de l'école.")
+        depot_affaire = Room("dépôt affaire", "la pièce remplie d'affaires d'étudiants de l'école.")
         self.rooms.append(depot_affaire)
-        jardin = Room("jardin", "dans un jardin, au milieu, il y a une fontaine avec des plantes qui chantent.")
+        jardin = Room("jardin", "un jardin, au milieu, il y a une fontaine avec des plantes qui chantent.")
         self.rooms.append(jardin)
-        cours_botanique = Room("cours_botanique", "dans une serre entourée de plantes magiques.")
+        cours_botanique = Room("cours_botanique", "une serre entourée de plantes magiques.")
         self.rooms.append(cours_botanique)
-        couloir_etage_1 = Room("couloir_etage_1", "dans le couloire de l'étage 1.")
+        couloir_etage_1 = Room("couloir_etage_1", "le couloire de l'étage 1.")
         self.rooms.append(couloir_etage_1)
-        salle_commune_de_Gryffondor = Room("salle_commune_de_Gryffondor", "dans la salle commune de Gryffondor, cette salle est remplie de rouge, avec principalement du bois comme matériau.")
+        salle_commune_de_Gryffondor = Room("salle_commune_de_Gryffondor", "la salle commune de Gryffondor, cette salle est remplie de rouge, avec principalement du bois comme matériau.")
         self.rooms.append(salle_commune_de_Gryffondor)
-        cours_de_magie = Room("cours_de_magie", "dans une salle de classe avec plusieurs rangées de tables et une céramique de dinosaure au plafond.")
+        cours_de_magie = Room("cours_de_magie", "une salle de classe avec plusieurs rangées de tables et une céramique de dinosaure au plafond.")
         self.rooms.append(cours_de_magie)
-        salle_commune = Room("salle_commune", "dans une grande salle avec plusieurs tables de banquet, tout au bout de la salle il y a la table des professeurs, des bougies flottant au plafond.")
+        salle_commune = Room("salle_commune", "une grande salle avec plusieurs tables de banquet, tout au bout de la salle il y a la table des professeurs, des bougies flottant au plafond.")
         self.rooms.append(salle_commune)
-        couloir_etage_2 = Room("couloir_etage_2", "dans le couloir de l'étage 2, très large rempli de fenêtres avec une vue incontournable.")
+        couloir_etage_2 = Room("couloir_etage_2", "le couloir de l'étage 2, très large rempli de fenêtres avec une vue incontournable.")
         self.rooms.append(couloir_etage_2)
-        cours_potion = Room("cours_potion", "dans une salle sombre avec plusieurs paillasses, possédant une marmite et des produits que vous ne connaissez pas.")
+        cours_potion = Room("cours_potion", "une salle sombre avec plusieurs paillasses, possédant une marmite et des produits que vous ne connaissez pas.")
         self.rooms.append(cours_potion)
-        salle_commune_Serpentard = Room("salle_commune_Serpentard", "dans une salle avec un aquarium, des canapés en cuir et à l'étage vos lits aux couleurs du blason.")
+        salle_commune_Serpentard = Room("salle_commune_Serpentard", "une salle avec un aquarium, des canapés en cuir et à l'étage vos lits aux couleurs du blason.")
         self.rooms.append(salle_commune_Serpentard)
-        toilette = Room("toilette", "dans une salle avec des robinets en plein milieu et un peu d'eau au sol.")
+        toilette = Room("toilette", "une salle avec des robinets en plein milieu et un peu d'eau au sol.")
         self.rooms.append(toilette)
-        cours_animaux_magiques = Room("cours_animaux_magiques", "dans une salle plusieurs animaux en cage, et des squelettes autour de la salle.")
+        cours_animaux_magiques = Room("cours_animaux_magiques", "une salle plusieurs animaux en cage, et des squelettes autour de la salle.")
         self.rooms.append(cours_animaux_magiques)
-        couloir_etage_3 = Room("couloir_etage_3", "dans le vouloire de l'étage 3, une tour avec un couloir très fin.")
+        couloir_etage_3 = Room("couloir_etage_3", "le vouloire de l'étage 3, une tour avec un couloir très fin.")
         self.rooms.append(couloir_etage_3)
-        salle_commune_de_Poufsouffle = Room("salle_commune_de_Poufsouffle", "dans une pièce ovale avec plusieurs étagères remplies de livres.")
+        salle_commune_de_Poufsouffle = Room("salle_commune_de_Poufsouffle", "une pièce ovale avec plusieurs étagères remplies de livres.")
         self.rooms.append(salle_commune_de_Poufsouffle)
-        salle_commune_de_Serdaigle = Room("salle_commune_de_Serdaigle", "dans une très épurée, très claire et remplie de fenêtres qui laissent entrer la lumière du jour.")
+        salle_commune_de_Serdaigle = Room("salle_commune_de_Serdaigle", "une très épurée, très claire et remplie de fenêtres qui laissent entrer la lumière du jour.")
         self.rooms.append(salle_commune_de_Serdaigle)
-        cours_de_defance = Room("cours_de_defance", "dans une salle possédant un pupitre d'affrontement de sorciers et des chaises.")
+        cours_de_defance = Room("cours_de_defance", "une salle possédant un pupitre d'affrontement de sorciers et des chaises.")
         self.rooms.append(cours_de_defance)
 
 
@@ -112,13 +112,14 @@ class Game:
 
         command_word = list_of_words[0]
 
-        # If the command is not recognized, print an error message
-        if command_word not in self.commands.keys():
-            print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
-        # If the command is recognized, execute it
-        else:
-            command = self.commands[command_word]
-            command.action(self, list_of_words, command.number_of_parameters)
+        if command_word != "":
+            # If the command is not recognized, print an error message
+            if command_word not in self.commands.keys():
+                print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
+            # If the command is recognized, execute it
+            else:
+                command = self.commands[command_word]
+                command.action(self, list_of_words, command.number_of_parameters)
 
     # Print the welcome message
     def print_welcome(self):

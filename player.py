@@ -10,9 +10,7 @@ class Player():
     # Define the move method.
     def move(self, direction):
         try:
-            # Convertir la direction en majuscule
-            direction = direction.upper()
-            
+                     
             # Vérifie que la salle actuelle et la direction sont valides.
             if not self.current_room or direction not in self.current_room.exits:
                 print("\nAucune porte dans cette direction !\n")
