@@ -1,8 +1,11 @@
+from inventory import Inventory
+
 # Define the Player class.
-class Player():
+class Player(Inventory):
 
     # Define the constructor.
     def __init__(self, name):
+        super().__init__()
         self.name = name
         self.current_room = None
         self.history = []
@@ -10,7 +13,9 @@ class Player():
     # Define the move method.
     def move(self, direction):
         try:
-                     
+            # Convertir la direction en majuscule
+            direction = direction.upper()
+
             # Vérifie que la salle actuelle et la direction sont valides.
             if not self.current_room or direction not in self.current_room.exits:
                 print("\nAucune porte dans cette direction !\n")
@@ -39,9 +44,9 @@ class Player():
     # Retoure les lieux visités
     def print_history(self):
         try:
-            if len(self.history) >= 1:
+            if len(self.history) > 1:
                 print("\nVous avez déjà visité les pièces suivantes:")
-                for room in self.history:  # Exclut la pièce actuelle de l'historique affiché
+                for room in self.history[:-1]:  # Exclut la pièce actuelle de l'historique affiché
                     print(f"    - {room.description}")
             else:
                 print("\nVous n'avez visité aucune autre pièce.")
@@ -51,9 +56,9 @@ class Player():
     # Define the back method.
     def back(self):
         try:
-            if len(self.history) >= 1:
-                # Set the current room to the previous room
-                self.current_room = self.history.pop()
+            if len(self.history) > 1:
+                self.history.pop()
+                self.current_room = self.history[-1]
                 print(self.current_room.get_long_description())
                 self.print_history()
                 return True

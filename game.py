@@ -6,6 +6,8 @@ from room import Room
 from player import Player
 from command import Command
 from actions import Actions
+from item import Item
+from beamer import Beamer
 
 class Game:
 
@@ -29,7 +31,21 @@ class Game:
         self.commands["go"] = go
         back_cmd = Command("back", " : revenir à la salle précédente", Actions.back, 0)
         self.commands["back"] = back_cmd
-        
+        look = Command("look", " : regarder les objets dans la pièce", Actions.look, 0)
+        self.commands["look"] = look
+        take = Command("take", " : prendre un objet", Actions.take, 1)
+        self.commands["take"] = take
+        drop = Command("drop", " : lâcher un objet", Actions.drop, 1)
+        self.commands["drop"] = drop
+        history = Command("history", " : affiche l'historique des salles", Actions.history, 0)
+        self.commands["history"] = history
+        check = Command("check", " : affiche l'inventaire du joueur", Actions.check, 0)
+        self.commands["check"] = check
+        use = Command("use", " : utilise un item de ton inventaire", Actions.use, 1)
+        self.commands["use"] = use
+        charge = Command("charge", " : charger un Beamer avec la salle actuelle", Actions.charge, 1)
+        self.commands["charge"] = charge
+
         # Setup rooms
 
         entrée = Room("entrée", "le couloire principale de l'ecole de poudlard.")
@@ -88,7 +104,17 @@ class Game:
         salle_commune_de_Serdaigle.exits = {"N" : None, "E" : None, "S" : None, "O" : couloir_etage_3 ,"U" : None , "D" : couloir_etage_2}
         cours_de_defance.exits = {"N" : couloir_etage_3, "E" : None, "S" : None, "O" : None ,"U" : None , "D" : couloir_etage_2}
 
+        # Setup items
 
+        bagette = Item("bagette", "une bagette magique en ecaille de dragon", 30)
+        depot_affaire.inventory[bagette.name] = bagette
+        cape = Item("cape", "une longue cape noir", 50)
+        depot_affaire.inventory[cape.name] = cape
+        chapeau = Item("chapeau", "un chapeau pointuelégèrement abimé", 60)
+        depot_affaire.inventory[chapeau.name] = chapeau
+        beamer = Beamer("beamer", "Un appareil magique pour téléporter.", 25)
+        toilette.inventory[beamer.name] = beamer
+        
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
