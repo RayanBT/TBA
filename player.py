@@ -1,13 +1,14 @@
 from inventory import Inventory
+from config import DEBUG
 
 # Define the Player class.
 class Player(Inventory):
 
     # Define the constructor.
-    def __init__(self, name):
+    def __init__(self, name, current_room = None):
         super().__init__()
         self.name = name
-        self.current_room = None
+        self.current_room = current_room
         self.history = []
     
     # Define the move method.
@@ -35,11 +36,13 @@ class Player(Inventory):
             return True
 
         except AttributeError:
-            print("\nErreur : La salle actuelle n'a pas de sorties ou la direction n'est pas valide.")
-            return False
+            if DEBUG:
+                print("\nErreur : La salle actuelle n'a pas de sorties ou la direction n'est pas valide.")
+                return False
         except Exception as e:
-            print(f"\nUne erreur inattendue s'est produite : {e}")
-            return False
+            if DEBUG:
+                print(f"\nUne erreur inattendue s'est produite : {e}")
+                return False
 
     # Retoure les lieux visités
     def print_history(self):

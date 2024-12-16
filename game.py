@@ -8,6 +8,8 @@ from command import Command
 from actions import Actions
 from item import Item
 from beamer import Beamer
+from character import Character
+from config import DEBUG
 
 class Game:
 
@@ -45,6 +47,8 @@ class Game:
         self.commands["use"] = use
         charge = Command("charge", " : charger un Beamer avec la salle actuelle", Actions.charge, 1)
         self.commands["charge"] = charge
+        talk = Command("talk", " : interagir avec un pnj de la meme piece", Actions.talk, 1)
+        self.commands["talk"] = talk
 
         # Setup rooms
 
@@ -114,6 +118,11 @@ class Game:
         depot_affaire.inventory[chapeau.name] = chapeau
         beamer = Beamer("beamer", "Un appareil magique pour téléporter.", 25)
         toilette.inventory[beamer.name] = beamer
+
+        # Setup characters (PNJ)
+        
+        gandalf = Character("gandalf", "un magicien blanc", entrée, ["Abracadabra !"])
+        entrée.characters[gandalf.name] = gandalf
         
         # Setup player and starting room
 
@@ -126,6 +135,7 @@ class Game:
         self.print_welcome()
         # Loop until the game is finished
         while not self.finished:
+            # Déplacer les PNJ au début de chaque tour
             # Get the command from the player
             self.process_command(input("> "))
         return None
@@ -146,6 +156,8 @@ class Game:
             else:
                 command = self.commands[command_word]
                 command.action(self, list_of_words, command.number_of_parameters)
+                if command_word != "quit":
+                    self.move_characters()
 
     # Print the welcome message
     def print_welcome(self):
@@ -153,7 +165,13 @@ class Game:
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
         print(self.player.current_room.get_long_description())
-    
+
+    def move_characters(self):
+        for room in self.rooms:
+            # Créer une copie de la liste des personnages dans la pièce
+            characters_to_move = list(room.characters.values())  # Liste des personnages à déplacer
+            for character in characters_to_move:
+                character.move()
 
 def main():
     # Create a game object and play the game

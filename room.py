@@ -8,6 +8,7 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory = {}
+        self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -28,9 +29,18 @@ class Room:
         return f"\nVous êtes dans {self.description}\n\n{self.get_exit_string()}\n"
     
     def get_inventory(self):
-        if len(self.inventory) >= 1:
-            print("\nLa pièce contient :")
-            for name, item in self.inventory.items():
-                print(f"    - {name} : {item.description} ({item.weight} g)")
+        if len(self.inventory) >= 1 or len(self.characters) >= 1:
+            print("\nOn voit :")
+            if len(self.inventory) >= 1:
+                for name, item in self.inventory.items():
+                    print(f"    - {name} : {item.description} ({item.weight} g)")
+            elif len(self.characters) >= 1:
+                for name, item in self.characters.items():
+                    print(f"    - {item}")
+            else:
+                print("pas de PNJ")
         else:
             print("\nIl n'y a rien ici.")
+    
+    
+
