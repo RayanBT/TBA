@@ -10,6 +10,7 @@ from item import Item
 from beamer import Beamer
 from character import Character
 from config import DEBUG
+from conditions import Conditions
 
 class Game:
 
@@ -19,6 +20,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+        self.conditions = None
     
     # Setup the game
     def setup(self):
@@ -129,25 +131,27 @@ class Game:
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = entrée
 
+        # Setup conditions
+        self.conditions = Conditions(self)
+
     # Play the game
     def play(self):
         self.setup()
         self.print_welcome()
         # Loop until the game is finished
         while not self.finished:
-            # Déplacer les PNJ au début de chaque tour
             # Get the command from the player
             self.process_command(input("> "))
+            end_message = self.conditions.check_conditions()
+            if end_message:
+                print(end_message)
         return None
 
     # Process the command entered by the player
     def process_command(self, command_string) -> None:
-
         # Split the command string into a list of words
         list_of_words = command_string.split(" ")
-
         command_word = list_of_words[0]
-
         if command_word != "":
             # If the command is not recognized, print an error message
             if command_word not in self.commands.keys():
