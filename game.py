@@ -151,14 +151,14 @@ class Game:
         professeur_des_annimeaux_magique = Character("professeur_des_annimeaux_magique", "le professeur des annimeaux avec un manteaux vert", cours_animaux_magiques, ["Je suis le professeur des annimeaux magie."])
         cours_animaux_magiques.characters[professeur_des_annimeaux_magique.name] = professeur_des_annimeaux_magique
         
-        professeur_de_botanique = Character("professeur_de_botanique", "le professeur de botanique avec des gant", professeur_de_botanique, ["Je suis le professeur de botanique."])
-        cours_animaux_magiques.characters[professeur_de_botanique.name] = professeur_de_botanique
+        professeur_de_botanique = Character("professeur_de_botanique", "le professeur de botanique avec des gant", cours_botanique, ["Je suis le professeur de botanique."])
+        cours_botanique.characters[professeur_de_botanique.name] = professeur_de_botanique
 
-        professeur_de_potion = Character("professeur_de_potion", "le professeur de potion avec une longue cape sombre", professeur_de_potion, ["Je suis le professeur de potion."])
-        cours_animaux_magiques.characters[professeur_de_potion.name] = professeur_de_potion
+        professeur_de_potion = Character("professeur_de_potion", "le professeur de potion avec une longue cape sombre", cours_potion, ["Je suis le professeur de potion."])
+        cours_potion.characters[professeur_de_potion.name] = professeur_de_potion
         
-        professeur_de_defance = Character("professeur_de_defance", "le professeur de defance avec un ", professeur_de_defance, ["Je suis le professeur de defance."])
-        cours_animaux_magiques.characters[professeur_de_defance.name] = professeur_de_defance
+        professeur_de_defance = Character("professeur_de_defance", "le professeur de defance avec un ", cours_de_defance, ["Je suis le professeur de defance."])
+        cours_de_defance.characters[professeur_de_defance.name] = professeur_de_defance
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
@@ -326,7 +326,7 @@ class Game:
         print("Entrez 'help' si vous avez besoin d'aide.")
         print(self.player.current_room.get_long_description())
 
-         # Informer le joueur de la première étape de la quête
+        # Informer le joueur de la première étape de la quête
         if self.quests:
             first_quest = self.quests[0]
             first_step = first_quest.get_current_step()
