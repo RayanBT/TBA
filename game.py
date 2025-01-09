@@ -91,7 +91,8 @@ class Game:
         self.rooms.append(salle_commune_de_Serdaigle)
         cours_de_defance = Room("cours_de_defance", "une salle possédant un pupitre d'affrontement de sorciers et des chaises.")
         self.rooms.append(cours_de_defance)
-
+        salle_sombre = Room("salle_sombre", "une salle sombre avec plusieur cadavre d'etudiant.")
+        self.rooms.append(salle_sombre)
 
         # Create exits for rooms
 
@@ -112,6 +113,7 @@ class Game:
         salle_commune_de_Poufsouffle.exits = {"N" : None, "E" : None, "S" : couloir_etage_3, "O" : None ,"U" : None , "D" : couloir_etage_2}
         salle_commune_de_Serdaigle.exits = {"N" : None, "E" : None, "S" : None, "O" : couloir_etage_3 ,"U" : None , "D" : couloir_etage_2}
         cours_de_defance.exits = {"N" : couloir_etage_3, "E" : None, "S" : None, "O" : None ,"U" : None , "D" : couloir_etage_2}
+        salle_sombre.exits = {"N" : couloir_etage_3, "E" : None, "S" : None, "O" : None ,"U" : None , "D" : couloir_etage_2}#a faire ---------------------------------
 
         # Setup items
 
@@ -125,11 +127,17 @@ class Game:
         toilette.inventory[beamer.name] = beamer
         livre = Item("livre", "un livre de sorts", 10)
         potion = Item("potion", "une potion de guérison", 5)
-
+        cape_sombre = Item("cape", "une cape noir avec des motif plus sombre", 5)
+        diplome_de_magie = Item("diplome de magie", "un diplome de magie", 1)
+        diplome_de_botanique = Item("diplome de botanique", "un diplome de botanique", 1)
+        diplome_de_potion = Item("diplome de potion", "un diplome de potion", 1)
+        diplome_d_annimeaux_magique = Item("diplome d'annimeaux magique", "un diplome d'annimeaux magique", 1)
+        diplome_de_defance = Item("diplome de defance", "un diplome de defance", 1)
+        
 
         # Setup characters (PNJ)
-        hermione = Character("Hermione", "une sorcière très intelligente", salle_commune_de_Gryffondor, ["Bonjour, je suis Hermione."])
-        salle_commune_de_Gryffondor.characters[hermione.name] = hermione
+        chapeau_magique = Character("chapeau magique", "un chapeau sombre et abimer pouvant parler", salle_commune, ["Bonjour, je suis un chapeau magique."])
+        salle_commune.characters[chapeau_magique.name] = chapeau_magique
 
         dumbledore = Character("Dumbledore", "le directeur de l'école", salle_commune, ["Bienvenue à Poudlard !"])
         salle_commune.characters[dumbledore.name] = dumbledore
@@ -137,10 +145,20 @@ class Game:
         hagrid = Character("Hagrid", "le gardien des clés et des lieux", jardin, ["Salut, je suis Hagrid."])
         jardin.characters[hagrid.name] = hagrid
 
-        snape = Character("Snape", "le professeur de potions", cours_potion, ["Je suis le professeur Snape."])
-        cours_potion.characters[snape.name] = snape
+        professeur_de_magie = Character("professeur_de_magie", "le professeur de magie avec un tres large chapeaux", cours_de_magie, ["Je suis le professeur de magie."])
+        cours_de_magie.characters[professeur_de_magie.name] = professeur_de_magie
 
+        professeur_des_annimeaux_magique = Character("professeur_des_annimeaux_magique", "le professeur des annimeaux avec un manteaux vert", cours_animaux_magiques, ["Je suis le professeur des annimeaux magie."])
+        cours_animaux_magiques.characters[professeur_des_annimeaux_magique.name] = professeur_des_annimeaux_magique
         
+        professeur_de_botanique = Character("professeur_de_botanique", "le professeur de botanique avec des gant", professeur_de_botanique, ["Je suis le professeur de botanique."])
+        cours_animaux_magiques.characters[professeur_de_botanique.name] = professeur_de_botanique
+
+        professeur_de_potion = Character("professeur_de_potion", "le professeur de potion avec une longue cape sombre", professeur_de_potion, ["Je suis le professeur de potion."])
+        cours_animaux_magiques.characters[professeur_de_potion.name] = professeur_de_potion
+        
+        professeur_de_defance = Character("professeur_de_defance", "le professeur de defance avec un ", professeur_de_defance, ["Je suis le professeur de defance."])
+        cours_animaux_magiques.characters[professeur_de_defance.name] = professeur_de_defance
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
@@ -152,54 +170,122 @@ class Game:
         # Setup quests
         quest_steps = [
             QuestStep(
-                "Parlez à Hermione dans la salle commune de Gryffondor.",
-                character=hermione,
-                special_responses=["Hermione: Bonjour, je suis Hermione. J'ai besoin de votre aide pour trouver un livre."],
-                choices=[["Oui, je vais vous aider.", "Non, je suis occupé."]],
-                correct_choices=[["Oui, je vais vous aider."]],
-                reward_item=livre
+                "Parlez au chpeau dans la salle commune.",
+                character=chapeau_magique,
+                special_responses=[
+                    "chapeau magique : Bonjour, je suis ici pour que vous choisisait votre maison",
+                    "chapeau magique : quelle maison vouslez vous ?"
+                ],
+                choices=[
+                    ["Oui, je veux choisir.", "Non, je suis occupé."],
+                    ["Gryffondor","Serpentard","Serdaigle","Poufsouffle"]
+                ],
+                correct_choices=[["Oui, je veux choisir."],[]], #plusieur corect choix-----------------------------------------------------
+                reward_item=cape_sombre
             ),
             QuestStep(
-                "Parlez à Dumbledore dans la salle commune.",
-                character=dumbledore,
+                "assister au cour de magie dans la salle de magie",
+                character=professeur_de_magie,
                 special_responses=[
-                    "Dumbledore: Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
-                    "Dumbledore: Répétez après moi : 'Wingardium'.",
-                    "Dumbledore: Répétez après moi : 'Leviosa'.",
-                    "Dumbledore: Maintenant, dites l'incantation complète : 'Wingardium Leviosa'."
+                    "professeur de magie : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur de magie : Répétez après moi : 'Accio'.",
+                    "professeur de magie : Répétez après moi : 'Lumos'.",
+                    "professeur de magie : Répétez après moi : 'Alohomora'."
                 ],
                 choices=[
                     ["Oui, je suis prêt.", "Non, pas maintenant."],
-                    ["Wingardium", "Wingardum", "Wingardem", "Wingardom", "Wingardam"],
-                    ["Leviosa", "Leviosum", "Leviosam", "Leviosom", "Leviosum"],
-                    ["Wingardium Leviosa", "Wingardium Leviosum", "Wingardium Leviosam", "Wingardium Leviosom", "Wingardium Leviosum"]
+                    ["Acioo", "Accio", "Accie"],
+                    ["Lumos", "Lumo", "Lmos"],
+                    ["Alohoomoa", "Alohmiora", "Alohomora"]
                 ],
                 correct_choices=[
                     ["Oui, je suis prêt."],
-                    ["Wingardium"],
-                    ["Leviosa"],
-                    ["Wingardium Leviosa"]
-                ]
+                    ["Accio"],
+                    ["Lumos"],
+                    ["Alohomora"]
+                ],
+                reward_item=diplome_de_magie
             ),
             QuestStep(
-                "Parlez à Hagrid dans le jardin.",
-                character=hagrid,
-                special_responses=["Hagrid: Salut, je suis Hagrid. Pouvez-vous m'aider à nourrir les créatures magiques ?"],
-                choices=[["Oui, bien sûr.", "Non, désolé."]],
-                correct_choices=[["Oui, bien sûr."]],
-                reward_item=potion
+                "assister au cour de botanique dans la salle de botanique",
+                character=professeur_de_botanique,
+                special_responses=[
+                    "professeur de botanique : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur de botanique : pour faire replanter une mandragore il faut l'arracher d'un coup sec en mettant vos bouchon d'oreil",
+                    "professeur de botanique : il faut la placer dans le nouveau pot et remborée avec de la terre"
+                ],
+                choices=[
+                    ["Oui, je suis prêt.", "Non, pas maintenant."],
+                    ["arracher la plante", "mettre ses bouchon d'oreil et arracher la plante", "mettre ses bouchon d'oreil"],
+                    ["mettre la mandragore dans un pot et rajouter du fumier", "mettre la mandragore dans un pot", "mettre de la terre dans le pot"]
+                ],
+                correct_choices=[
+                    ["Oui, je suis prêt."],
+                    ["mettre ses bouchon d'oreil et arracher la plante"],
+                    ["mettre la mandragore dans un pot et rajouter du fumier"]
+                ],
+                reward_item=diplome_de_botanique
             ),
             QuestStep(
-                "Parlez à Snape dans le cours de potions.",
-                character=snape,
-                special_responses=["Snape: Je suis le professeur Snape. Vous devez préparer une potion."],
-                choices=[["D'accord, je vais essayer.", "Je ne sais pas comment faire."]],
-                correct_choices=[["D'accord, je vais essayer."]]
+                "assister au cour de potion dans la salle de potion",
+                character=professeur_de_potion,
+                special_responses=[
+                    "professeur de potion : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur de potion : pour faire Felix Felicis mettre des crocher d'aregnier",
+                    "professeur de potion : il faut apresant des feuille de mandragore"
+                ],
+                choices=[
+                    ["Oui, je suis prêt.", "Non, pas maintenant."],
+                    ["mettre de l'eau", "mettre des crocher d'aregnier", "mettre du jus de citrouille"],
+                    ["mettre des feuille de mandragore", "mettre une plume de hibou", "mettre du radi venimeux"]
+                ],
+                correct_choices=[
+                    ["Oui, je suis prêt."],
+                    ["mettre des crocher d'aregnier"],
+                    ["mettre des feuille de mandragore"]
+                ],
+                reward_item=diplome_de_potion
             ),
             QuestStep(
-                "Récupérez la bagette magique.",
-                item=bagette
-            )
+                "assister au cour de annimaux magique",
+                character=professeur_des_annimeaux_magique,
+                special_responses=[
+                    "professeur des annimeaux magique : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur des annimeaux magique : repéré un annimal magique ressanblant a un cheval mais avec une corne sur la tete",
+                ],
+                choices=[
+                    ["Oui, je suis prêt.", "Non, pas maintenant."],
+                    ["un hippogriffe", "une licorne", "un Phénix"]
+                ],
+                correct_choices=[
+                    ["Oui, je suis prêt."],
+                    ["une licorne"]
+                ],
+                reward_item=diplome_d_annimeaux_magique
+            ),
+            QuestStep(
+                "assister au cour de defance dans la salle de defance",
+                character=professeur_de_defance,
+                special_responses=[
+                    "professeur de defance : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur de defance : Répétez après moi : 'Stupéfix'.",
+                    "professeur de defance : Répétez après moi : 'Protego'.",
+                    "professeur de defance : Répétez après moi : 'Petrificus Totalus'."
+                ],
+                choices=[
+                    ["Oui, je suis prêt.", "Non, pas maintenant."],
+                    ["Stuqéfix", "Stupéfix", "Stipéfix"],
+                    ["Protego", "Proteqo", "Prottego"],
+                    ["Petrificus Totalus", "Petrificus Totalu", "Pettrificus Totalus"]
+                ],
+                correct_choices=[
+                    ["Oui, je suis prêt."],
+                    ["Stupéfix"],
+                    ["Protego"],
+                    ["Petrificus Totalus"]
+                ],
+                reward_item=diplome_de_defance
+            ),
         ]
         main_quest = Quest("La quête principale", "Accomplissez les tâches pour avancer dans l'histoire.", quest_steps)
         self.quests.append(main_quest)
