@@ -215,6 +215,7 @@ class Actions:
                 # Retirer l'item de l'inventaire de la pièce
                 current_room.inventory.pop(item_name)
                 print(f"Vous avez pris {item_name}.")
+                Actions.check_quest_item(game, item)
                 return True
             else:
                 print(f"Vous ne pouvez pas prendre {item_name}, poids maximum dépassé.")
@@ -222,6 +223,18 @@ class Actions:
         else:
             print(f"{item_name} n'est pas dans cette pièce.")
             return False
+    
+    def check_quest_item(game, item):
+        # Vérifier si l'objet fait partie de la quête actuelle
+        for quest in game.quests:
+            current_step = quest.get_current_step()
+            if current_step and current_step.item == item:
+                quest.advance()
+                if quest.is_complete():
+                    print(f"Félicitations, vous avez complété la quête: {quest.name}")
+                else:
+                    print(f"Étape suivante: {current_step.description}")
+                break
         
     def drop(game, list_of_words, number_of_parameters):
         """
@@ -307,7 +320,22 @@ class Actions:
         
         if len(game.player.current_room.characters) >=1:
             character_name = list_of_words[1].lower()
-            character = game.player.current_room.characters[character_name]
+            character = game.player.current_room.get_character(character_name)
             print(character.get_msg())
+
+            # Vérifier si le personnage fait partie de la quête actuelle
+            Actions.check_quest_talk(game, character)
         else:
             print("Il n'y a aucun PNJ dans cette pièce")
+
+    def check_quest_talk(game, character):
+        # Vérifier si le personnage fait partie de la quête actuelle
+        for quest in game.quests:
+            current_step = quest.get_current_step()
+            if current_step and current_step.character == character:
+                quest.advance()
+                if quest.is_complete():
+                    print(f"Félicitations, vous avez complété la quête: {quest.name}")
+                else:
+                    print(f"Étape suivante: {quest.get_current_step().description}")
+                break

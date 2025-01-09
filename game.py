@@ -11,6 +11,8 @@ from beamer import Beamer
 from character import Character
 from config import DEBUG
 from conditions import Conditions
+from quest import Quest, QuestStep
+
 
 class Game:
 
@@ -21,6 +23,7 @@ class Game:
         self.commands = {}
         self.player = None
         self.conditions = None
+        self.quests = []
     
     # Setup the game
     def setup(self):
@@ -125,6 +128,17 @@ class Game:
         
         gandalf = Character("gandalf", "un magicien blanc", entrée, ["Abracadabra !"])
         entrée.characters[gandalf.name] = gandalf
+        hermione = Character("Hermione", "une sorcière très intelligente", salle_commune_de_Gryffondor, ["Bonjour, je suis Hermione."])
+        salle_commune_de_Gryffondor.characters[hermione.name] = hermione
+
+        dumbledore = Character("Dumbledore", "le directeur de l'école", salle_commune, ["Bienvenue à Poudlard !"])
+        salle_commune.characters[dumbledore.name] = dumbledore
+
+        hagrid = Character("Hagrid", "le gardien des clés et des lieux", jardin, ["Salut, je suis Hagrid."])
+        jardin.characters[hagrid.name] = hagrid
+
+        snape = Character("Snape", "le professeur de potions", cours_potion, ["Je suis le professeur Snape."])
+        cours_potion.characters[snape.name] = snape
         
         # Setup player and starting room
 
@@ -133,6 +147,17 @@ class Game:
 
         # Setup conditions
         self.conditions = Conditions(self)
+
+        # Setup quests
+        quest_steps = [
+            QuestStep("Parlez à Hermione dans la salle commune de Gryffondor.", character=hermione),
+            QuestStep("Parlez à Dumbledore dans la salle commune.", character=dumbledore),
+            QuestStep("Parlez à Hagrid dans le jardin.", character=hagrid),
+            QuestStep("Parlez à Snape dans le cours de potions.", character=snape),
+            QuestStep("Récupérez la bagette magique.", item=bagette)
+        ]
+        main_quest = Quest("La quête principale", "Accomplissez les tâches pour avancer dans l'histoire.", quest_steps)
+        self.quests.append(main_quest)
 
     # Play the game
     def play(self):
@@ -161,14 +186,22 @@ class Game:
                 command = self.commands[command_word]
                 command.action(self, list_of_words, command.number_of_parameters)
                 if command_word != "quit":
-                    self.move_characters()
+                    #self.move_characters()
+                    pass
 
     # Print the welcome message
     def print_welcome(self):
         print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
         print("Entrez 'help' si vous avez besoin d'aide.")
-        #
         print(self.player.current_room.get_long_description())
+
+         # Informer le joueur de la première étape de la quête
+        if self.quests:
+            first_quest = self.quests[0]
+            first_step = first_quest.get_current_step()
+            if first_step:
+                print(f"\nQuête actuelle: {first_quest.name}")
+                print(f"Étape actuelle: {first_step.description}")
 
     def move_characters(self):
         for room in self.rooms:

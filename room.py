@@ -41,6 +41,13 @@ class Room:
                 print("pas de PNJ")
         else:
             print("\nIl n'y a rien ici.")
+
+    def get_character(self, name):        
+        name_lower = name.lower()        
+        for key in self.characters.keys():
+            if key.lower() == name_lower:
+                return self.characters[key]
+        return None
     
     
 
