@@ -123,11 +123,11 @@ class Game:
         depot_affaire.inventory[chapeau.name] = chapeau
         beamer = Beamer("beamer", "Un appareil magique pour téléporter.", 25)
         toilette.inventory[beamer.name] = beamer
+        livre = Item("livre", "un livre de sorts", 10)
+        potion = Item("potion", "une potion de guérison", 5)
+
 
         # Setup characters (PNJ)
-        
-        gandalf = Character("gandalf", "un magicien blanc", entrée, ["Abracadabra !"])
-        entrée.characters[gandalf.name] = gandalf
         hermione = Character("Hermione", "une sorcière très intelligente", salle_commune_de_Gryffondor, ["Bonjour, je suis Hermione."])
         salle_commune_de_Gryffondor.characters[hermione.name] = hermione
 
@@ -139,6 +139,7 @@ class Game:
 
         snape = Character("Snape", "le professeur de potions", cours_potion, ["Je suis le professeur Snape."])
         cours_potion.characters[snape.name] = snape
+
         
         # Setup player and starting room
 
@@ -150,11 +151,55 @@ class Game:
 
         # Setup quests
         quest_steps = [
-            QuestStep("Parlez à Hermione dans la salle commune de Gryffondor.", character=hermione),
-            QuestStep("Parlez à Dumbledore dans la salle commune.", character=dumbledore),
-            QuestStep("Parlez à Hagrid dans le jardin.", character=hagrid),
-            QuestStep("Parlez à Snape dans le cours de potions.", character=snape),
-            QuestStep("Récupérez la bagette magique.", item=bagette)
+            QuestStep(
+                "Parlez à Hermione dans la salle commune de Gryffondor.",
+                character=hermione,
+                special_responses=["Hermione: Bonjour, je suis Hermione. J'ai besoin de votre aide pour trouver un livre."],
+                choices=[["Oui, je vais vous aider.", "Non, je suis occupé."]],
+                correct_choices=[["Oui, je vais vous aider."]],
+                reward_item=livre
+            ),
+            QuestStep(
+                "Parlez à Dumbledore dans la salle commune.",
+                character=dumbledore,
+                special_responses=[
+                    "Dumbledore: Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "Dumbledore: Répétez après moi : 'Wingardium'.",
+                    "Dumbledore: Répétez après moi : 'Leviosa'.",
+                    "Dumbledore: Maintenant, dites l'incantation complète : 'Wingardium Leviosa'."
+                ],
+                choices=[
+                    ["Oui, je suis prêt.", "Non, pas maintenant."],
+                    ["Wingardium", "Wingardum", "Wingardem", "Wingardom", "Wingardam"],
+                    ["Leviosa", "Leviosum", "Leviosam", "Leviosom", "Leviosum"],
+                    ["Wingardium Leviosa", "Wingardium Leviosum", "Wingardium Leviosam", "Wingardium Leviosom", "Wingardium Leviosum"]
+                ],
+                correct_choices=[
+                    ["Oui, je suis prêt."],
+                    ["Wingardium"],
+                    ["Leviosa"],
+                    ["Wingardium Leviosa"]
+                ]
+            ),
+            QuestStep(
+                "Parlez à Hagrid dans le jardin.",
+                character=hagrid,
+                special_responses=["Hagrid: Salut, je suis Hagrid. Pouvez-vous m'aider à nourrir les créatures magiques ?"],
+                choices=[["Oui, bien sûr.", "Non, désolé."]],
+                correct_choices=[["Oui, bien sûr."]],
+                reward_item=potion
+            ),
+            QuestStep(
+                "Parlez à Snape dans le cours de potions.",
+                character=snape,
+                special_responses=["Snape: Je suis le professeur Snape. Vous devez préparer une potion."],
+                choices=[["D'accord, je vais essayer.", "Je ne sais pas comment faire."]],
+                correct_choices=[["D'accord, je vais essayer."]]
+            ),
+            QuestStep(
+                "Récupérez la bagette magique.",
+                item=bagette
+            )
         ]
         main_quest = Quest("La quête principale", "Accomplissez les tâches pour avancer dans l'histoire.", quest_steps)
         self.quests.append(main_quest)

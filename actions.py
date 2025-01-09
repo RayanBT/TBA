@@ -317,25 +317,73 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
-        
-        if len(game.player.current_room.characters) >=1:
+
+        if len(game.player.current_room.characters) >= 1:
             character_name = list_of_words[1].lower()
             character = game.player.current_room.get_character(character_name)
-            print(character.get_msg())
-
-            # Vérifier si le personnage fait partie de la quête actuelle
-            Actions.check_quest_talk(game, character)
+            
+            if not Actions.check_quest_talk(game, character):
+                print(character.get_msg())
         else:
             print("Il n'y a aucun PNJ dans cette pièce")
+        return True
 
     def check_quest_talk(game, character):
-        # Vérifier si le personnage fait partie de la quête actuelle
         for quest in game.quests:
             current_step = quest.get_current_step()
             if current_step and current_step.character == character:
-                quest.advance()
-                if quest.is_complete():
-                    print(f"Félicitations, vous avez complété la quête: {quest.name}")
-                else:
-                    print(f"Étape suivante: {quest.get_current_step().description}")
-                break
+                for _ in range(len(current_step.special_responses)):            
+                    Actions.handle_special_responses(current_step)
+                    if Actions.handle_choices(current_step, quest):
+                        Actions.advance_quest(game, quest)
+                        
+                return True
+        return False
+    
+    def handle_special_responses(current_step):
+        response = current_step.get_current_response()
+        if response:
+            print(response)
+    
+    def handle_choices(current_step, quest):
+        choices = current_step.get_current_choices()
+        if choices:
+            for i, choice in enumerate(choices, 1):
+                print(f"{i}. {choice}")
+            user_choice = input("Choisissez une option: ")
+            try:
+                user_choice = int(user_choice)
+                if 1 <= user_choice <= len(choices):
+                    chosen_option = choices[user_choice - 1]
+                    print(f"Vous avez choisi: {chosen_option}")
+                    correct_choices = current_step.get_current_correct_choices()
+                    if chosen_option in correct_choices:
+                        if current_step.advance_substep():
+                            return True
+                        return False
+                    else:
+                        print("Choix incorrect. La quête n'avance pas.")
+                        current_step.reset_substep()
+                        return False
+            except ValueError:
+                print("Choix invalide.")
+                return False
+        return False
+    
+    def advance_quest(game, quest):
+        current_step = quest.get_current_step()
+        if current_step.advance_substep():
+            quest.advance()
+            if current_step.reward_item:
+                game.player.inventory[current_step.reward_item.name] = current_step.reward_item
+                print(f"Vous avez reçu {current_step.reward_item.name} comme récompense.")
+            if quest.is_complete():
+                print(f"Félicitations, vous avez complété la quête: {quest.name}")
+            else:
+                next_step = quest.get_current_step()
+                if next_step:
+                    next_step.current_substep = 0  # Réinitialiser current_substep pour la nouvelle étape
+                    print(f"Étape suivante: {next_step.description}")
+        else:
+            Actions.handle_special_responses(current_step)
+            Actions.handle_choices(current_step, quest)
