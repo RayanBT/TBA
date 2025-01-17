@@ -35,7 +35,7 @@ class Game:
         self.commands["help"] = help
         quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
         self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)",
+        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)",
                     Actions.go, 1)
         self.commands["go"] = go
         back_cmd = Command("back", " : revenir à la salle précédente", Actions.back, 0)
@@ -291,7 +291,7 @@ class Game:
 
         # Ajouter des étudiants
         harry = Character(
-            "Harry Potter", 
+            "Harry_Potter", 
             "un étudiant célèbre avec une cicatrice en forme d'éclair", 
             salle_commune_de_gryffondor,
             [
