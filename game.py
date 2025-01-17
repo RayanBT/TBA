@@ -57,108 +57,245 @@ class Game:
 
         # Setup rooms
 
-        entrée = Room("entrée", "le couloire principale de l'ecole de poudlard.")
+        entrée = Room("entrée", "le couloir principal de l'école de Poudlard.")
         self.rooms.append(entrée)
-        depot_affaire = Room("dépôt affaire", "la pièce remplie d'affaires d'étudiants de l'école.")
+        depot_affaire = Room("dépôt_affaire", "une pièce remplie d'affaires d'étudiants de l'école.")
         self.rooms.append(depot_affaire)
-        jardin = Room("jardin", "un jardin, au milieu, il y a une fontaine avec des plantes qui chantent.")
+        jardin = Room("jardin", "un jardin où, au milieu, se trouve une fontaine entourée de plantes qui chantent.")
         self.rooms.append(jardin)
-        cours_botanique = Room("cours_botanique", "une serre entourée de plantes magiques.")
+        cours_botanique = Room("cours_botanique", "une serre remplie de plantes magiques.")
         self.rooms.append(cours_botanique)
-        couloir_etage_1 = Room("couloir_etage_1", "le couloire de l'étage 1.")
+        couloir_etage_1 = Room("couloir_etage_1", "le couloir du premier étage.")
         self.rooms.append(couloir_etage_1)
-        salle_commune_de_Gryffondor = Room("salle_commune_de_Gryffondor", "la salle commune de Gryffondor, cette salle est remplie de rouge, avec principalement du bois comme matériau.")
+        salle_commune_de_Gryffondor = Room("salle_commune_de_Gryffondor", "la salle commune de Gryffondor, décorée en rouge avec du bois en abondance.")
         self.rooms.append(salle_commune_de_Gryffondor)
-        cours_de_magie = Room("cours_de_magie", "une salle de classe avec plusieurs rangées de tables et une céramique de dinosaure au plafond.")
+        cours_de_magie = Room("cours_de_magie", "une salle de classe avec plusieurs rangées de tables et une maquette de dinosaure suspendue au plafond.")
         self.rooms.append(cours_de_magie)
-        salle_commune = Room("salle_commune", "une grande salle avec plusieurs tables de banquet, tout au bout de la salle il y a la table des professeurs, des bougies flottant au plafond.")
+        salle_commune = Room("salle_commune", "une grande salle avec plusieurs tables de banquet et des bougies flottant au plafond.")
         self.rooms.append(salle_commune)
-        couloir_etage_2 = Room("couloir_etage_2", "le couloir de l'étage 2, très large rempli de fenêtres avec une vue incontournable.")
+        couloir_etage_2 = Room("couloir_etage_2", "le couloir du deuxième étage, large et rempli de fenêtres offrant une vue imprenable.")
         self.rooms.append(couloir_etage_2)
-        cours_potion = Room("cours_potion", "une salle sombre avec plusieurs paillasses, possédant une marmite et des produits que vous ne connaissez pas.")
+        cours_potion = Room("cours_potion", "une salle sombre avec plusieurs paillasses, une marmite, et des ingrédients étranges.")
         self.rooms.append(cours_potion)
-        salle_commune_Serpentard = Room("salle_commune_Serpentard", "une salle avec un aquarium, des canapés en cuir et à l'étage vos lits aux couleurs du blason.")
+        salle_commune_Serpentard = Room("salle_commune_Serpentard", "une salle avec un grand aquarium, des canapés en cuir, et des lits aux couleurs de Serpentard.")
         self.rooms.append(salle_commune_Serpentard)
-        toilette = Room("toilette", "une salle avec des robinets en plein milieu et un peu d'eau au sol.")
+        toilette = Room("toilette", "une salle avec des robinets alignés au centre et de l'eau qui coule légèrement au sol.")
         self.rooms.append(toilette)
-        cours_animaux_magiques = Room("cours_animaux_magiques", "une salle plusieurs animaux en cage, et des squelettes autour de la salle.")
+        cours_animaux_magiques = Room("cours_animaux_magiques", "une salle remplie de cages contenant des animaux et de squelettes exposés.")
         self.rooms.append(cours_animaux_magiques)
-        couloir_etage_3 = Room("couloir_etage_3", "le vouloire de l'étage 3, une tour avec un couloir très fin.")
+        couloir_etage_3 = Room("couloir_etage_3", "le couloir du troisième étage, étroit et serpentant dans une tour.")
         self.rooms.append(couloir_etage_3)
-        salle_commune_de_Poufsouffle = Room("salle_commune_de_Poufsouffle", "une pièce ovale avec plusieurs étagères remplies de livres.")
+        salle_commune_de_Poufsouffle = Room("salle_commune_de_Poufsouffle", "une pièce ovale avec de nombreuses étagères remplies de livres.")
         self.rooms.append(salle_commune_de_Poufsouffle)
-        salle_commune_de_Serdaigle = Room("salle_commune_de_Serdaigle", "une très épurée, très claire et remplie de fenêtres qui laissent entrer la lumière du jour.")
+        salle_commune_de_Serdaigle = Room("salle_commune_de_Serdaigle", "une salle lumineuse et épurée, remplie de fenêtres laissant entrer la lumière du jour.")
         self.rooms.append(salle_commune_de_Serdaigle)
-        cours_de_defance = Room("cours_de_defance", "une salle possédant un pupitre d'affrontement de sorciers et des chaises.")
-        self.rooms.append(cours_de_defance)
-        salle_sombre = Room("salle_sombre", "une salle sombre avec plusieur cadavre d'etudiant.")
+        cours_de_defense = Room("cours_de_defense", "une salle avec un pupitre pour les duels et des chaises disposées en demi-cercle.")
+        self.rooms.append(cours_de_defense)
+        salle_sombre = Room("salle_sombre", "une salle lugubre avec plusieurs cadavres d'étudiants abandonnés.")
         self.rooms.append(salle_sombre)
 
         # Create exits for rooms
 
-        entrée.exits = {"N" : None, "E" : None, "S" : depot_affaire, "O" : jardin ,"U" : couloir_etage_1 , "D" : None}
-        depot_affaire.exits = {"N" : entrée, "E" : None, "S" : None, "O" : None ,"U" : couloir_etage_1 , "D" : None}
-        jardin.exits = {"N" : cours_botanique, "E" : entrée, "S" : None, "O" : None ,"U" : couloir_etage_1 , "D" : None}
-        cours_botanique.exits = {"N" : None, "E" : None, "S" : jardin, "O" : None ,"U" : couloir_etage_1 , "D" : None}
-        couloir_etage_1.exits = {"N" : salle_commune_de_Gryffondor, "E" : cours_de_magie, "S" : salle_commune, "O" : None ,"U" : couloir_etage_2 , "D" : entrée}
-        salle_commune_de_Gryffondor.exits = {"N" : None, "E" : None, "S" : couloir_etage_1, "O" : None ,"U" : couloir_etage_2 , "D" : entrée}
-        cours_de_magie.exits = {"N" : None, "E" : None, "S" : None, "O" : couloir_etage_1 ,"U" : couloir_etage_2 , "D" : entrée}
-        salle_commune.exits = {"N" : couloir_etage_1, "E" : None, "S" : None, "O" : None ,"U" : couloir_etage_2 , "D" : entrée}
-        couloir_etage_2.exits = {"N" : cours_potion, "E" : salle_commune_Serpentard, "S" : toilette, "O" : cours_animaux_magiques ,"U" : couloir_etage_3 , "D" : couloir_etage_1}
-        cours_potion.exits = {"N" : None, "E" : None, "S" : couloir_etage_2, "O" : None ,"U" : couloir_etage_3 , "D" : couloir_etage_1}
-        salle_commune_Serpentard.exits = {"N" : None, "E" : None, "S" : None, "O" : couloir_etage_2 ,"U" : couloir_etage_3 , "D" : couloir_etage_1}
-        cours_animaux_magiques.exits = {"N" : None, "E" : couloir_etage_2, "S" : None, "O" : None ,"U" : couloir_etage_3 , "D" : couloir_etage_1}
-        toilette.exits = {"N" : couloir_etage_2, "E" : None, "S" : None, "O" : None ,"U" : couloir_etage_3 , "D" : couloir_etage_1}
-        couloir_etage_3.exits = {"N" : salle_commune_de_Poufsouffle, "E" : salle_commune_de_Serdaigle, "S" : cours_de_defance, "O" : None ,"U" : None , "D" : couloir_etage_2}
-        salle_commune_de_Poufsouffle.exits = {"N" : None, "E" : None, "S" : couloir_etage_3, "O" : None ,"U" : None , "D" : couloir_etage_2}
-        salle_commune_de_Serdaigle.exits = {"N" : None, "E" : None, "S" : None, "O" : couloir_etage_3 ,"U" : None , "D" : couloir_etage_2}
-        cours_de_defance.exits = {"N" : couloir_etage_3, "E" : None, "S" : None, "O" : None ,"U" : None , "D" : couloir_etage_2}
-        salle_sombre.exits = {"N" : couloir_etage_3, "E" : None, "S" : None, "O" : None ,"U" : None , "D" : couloir_etage_2}#a faire ---------------------------------
+        entrée.exits = {"N": None, "E": None, "S": depot_affaire, "O": jardin, "U": couloir_etage_1, "D": None}
+        depot_affaire.exits = {"N": entrée, "E": None, "S": None, "O": None, "U": couloir_etage_1, "D": None}
+        jardin.exits = {"N": cours_botanique, "E": entrée, "S": None, "O": None, "U": couloir_etage_1, "D": None}
+        cours_botanique.exits = {"N": None, "E": None, "S": jardin, "O": None, "U": couloir_etage_1, "D": None}
+        couloir_etage_1.exits = {"N": salle_commune_de_Gryffondor, "E": cours_de_magie, "S": salle_commune, "O": None, "U": couloir_etage_2, "D": entrée}
+        salle_commune_de_Gryffondor.exits = {"N": None, "E": None, "S": couloir_etage_1, "O": None, "U": couloir_etage_2, "D": entrée}
+        cours_de_magie.exits = {"N": None, "E": None, "S": None, "O": couloir_etage_1, "U": couloir_etage_2, "D": entrée}
+        salle_commune.exits = {"N": couloir_etage_1, "E": None, "S": None, "O": None, "U": couloir_etage_2, "D": entrée}
+        couloir_etage_2.exits = {"N": cours_potion, "E": salle_commune_Serpentard, "S": toilette, "O": cours_animaux_magiques, "U": couloir_etage_3, "D": couloir_etage_1}
+        cours_potion.exits = {"N": None, "E": None, "S": couloir_etage_2, "O": None, "U": couloir_etage_3, "D": couloir_etage_1}
+        salle_commune_Serpentard.exits = {"N": None, "E": None, "S": None, "O": couloir_etage_2, "U": couloir_etage_3, "D": couloir_etage_1}
+        cours_animaux_magiques.exits = {"N": None, "E": couloir_etage_2, "S": None, "O": None, "U": couloir_etage_3, "D": couloir_etage_1}
+        toilette.exits = {"N": couloir_etage_2, "E": salle_sombre, "S": None, "O": None, "U": couloir_etage_3, "D": couloir_etage_1}
+        couloir_etage_3.exits = {"N": salle_commune_de_Poufsouffle, "E": salle_commune_de_Serdaigle, "S": cours_de_defense, "O": None, "U": None, "D": couloir_etage_2}
+        salle_commune_de_Poufsouffle.exits = {"N": None, "E": None, "S": couloir_etage_3, "O": None, "U": None, "D": couloir_etage_2}
+        salle_commune_de_Serdaigle.exits = {"N": None, "E": None, "S": None, "O": couloir_etage_3, "U": None, "D": couloir_etage_2}
+        cours_de_defense.exits = {"N": couloir_etage_3, "E": None, "S": None, "O": None, "U": None, "D": couloir_etage_2}
+        salle_sombre.exits = {"N": None, "E": None, "S": None, "O": toilette, "U": None, "D": None}
 
         # Setup items
 
-        bagette = Item("bagette", "une bagette magique en ecaille de dragon", 30)
-        depot_affaire.inventory[bagette.name] = bagette
-        cape = Item("cape", "une longue cape noir", 50)
+        baguette = Item("baguette", "une baguette magique en écailles de dragon", 30)
+        depot_affaire.inventory[baguette.name] = baguette
+
+        cape = Item("cape", "une longue cape noire", 50)
         depot_affaire.inventory[cape.name] = cape
-        chapeau = Item("chapeau", "un chapeau pointuelégèrement abimé", 60)
+
+        chapeau = Item("chapeau", "un chapeau pointu légèrement abîmé", 60)
         depot_affaire.inventory[chapeau.name] = chapeau
-        beamer = Beamer("beamer", "Un appareil magique pour téléporter.", 25)
+
+        beamer = Beamer("beamer", "un appareil magique pour se téléporter.", 25)
         toilette.inventory[beamer.name] = beamer
+
         livre = Item("livre", "un livre de sorts", 10)
         potion = Item("potion", "une potion de guérison", 5)
-        cape_sombre = Item("cape", "une cape noir avec des motif plus sombre", 5)
-        diplome_de_magie = Item("diplome de magie", "un diplome de magie", 1)
-        diplome_de_botanique = Item("diplome de botanique", "un diplome de botanique", 1)
-        diplome_de_potion = Item("diplome de potion", "un diplome de potion", 1)
-        diplome_d_annimeaux_magique = Item("diplome d'annimeaux magique", "un diplome d'annimeaux magique", 1)
-        diplome_de_defance = Item("diplome de defance", "un diplome de defance", 1)
-        
+
+        cape_sombre = Item("cape", "une cape noire avec des motifs plus sombres", 5)
+        diplome_de_magie = Item("diplôme de magie", "un diplôme de magie", 1)
+        diplome_de_botanique = Item("diplôme de botanique", "un diplôme de botanique", 1)
+        diplome_de_potion = Item("diplôme de potion", "un diplôme de potion", 1)
+        diplome_d_animaux_magiques = Item("diplôme d'animaux magiques", "un diplôme d'animaux magiques", 1)
+        diplome_de_defense = Item("diplôme de défense", "un diplôme de défense", 1)
+
 
         # Setup characters (PNJ)
-        chapeau_magique = Character("chapeau magique", "un chapeau sombre et abimer pouvant parler", salle_commune, ["Bonjour, je suis un chapeau magique."])
+
+        chapeau_magique = Character(
+            "chapeau_magique", 
+            "un chapeau sombre et abîmé capable de parler", 
+            salle_commune, 
+            [
+                "Bonjour, je suis un chapeau magique.",
+                "Je peux vous aider à choisir votre maison.",
+                "Quelle maison voulez-vous rejoindre ?"
+            ], 
+            can_move=False
+        )
         salle_commune.characters[chapeau_magique.name] = chapeau_magique
 
-        dumbledore = Character("Dumbledore", "le directeur de l'école", salle_commune, ["Bienvenue à Poudlard !"])
+        dumbledore = Character(
+            "Dumbledore", 
+            "le directeur de l'école", 
+            salle_commune, 
+            [
+                "Bienvenue à Poudlard !",
+                "Abracadabra !",
+                "Je suis Albus Dumbledore, le directeur de cette école.",
+                "N'oubliez pas de toujours faire ce qui est juste."
+            ],
+            can_move=False
+        )
         salle_commune.characters[dumbledore.name] = dumbledore
 
-        hagrid = Character("Hagrid", "le gardien des clés et des lieux", jardin, ["Salut, je suis Hagrid."])
+        hagrid = Character(
+            "Hagrid", 
+            "le gardien des clés et des lieux", 
+            jardin, 
+            [
+                "Salut, je suis Hagrid.",
+                "Je m'occupe des créatures magiques.",
+                "Avez-vous besoin d'aide pour nourrir les créatures ?"
+            ],
+            can_move=False
+        )
         jardin.characters[hagrid.name] = hagrid
 
-        professeur_de_magie = Character("professeur_de_magie", "le professeur de magie avec un tres large chapeaux", cours_de_magie, ["Je suis le professeur de magie."])
+        professeur_de_magie = Character(
+            "professeur_de_magie", 
+            "le professeur de magie avec un très large chapeau", 
+            cours_de_magie, 
+            [
+                "Je suis le professeur de magie.",
+                "Aujourd'hui, nous allons apprendre le sort 'Accio'.",
+                "Répétez après moi : 'Accio'."
+            ],
+            can_move=False
+        )
         cours_de_magie.characters[professeur_de_magie.name] = professeur_de_magie
 
-        professeur_des_annimeaux_magique = Character("professeur_des_annimeaux_magique", "le professeur des annimeaux avec un manteaux vert", cours_animaux_magiques, ["Je suis le professeur des annimeaux magie."])
-        cours_animaux_magiques.characters[professeur_des_annimeaux_magique.name] = professeur_des_annimeaux_magique
-        
-        professeur_de_botanique = Character("professeur_de_botanique", "le professeur de botanique avec des gant", cours_botanique, ["Je suis le professeur de botanique."])
+        professeur_des_animaux_magiques = Character(
+            "professeur_des_animaux_magiques", 
+            "le professeur des animaux magiques avec un manteau vert", 
+            cours_animaux_magiques, 
+            [
+                "Je suis le professeur des animaux magiques.",
+                "Aujourd'hui, nous allons étudier les hippogriffes.",
+                "Répétez après moi : 'Hippogriffe'."
+            ],
+            can_move=False
+        )
+        cours_animaux_magiques.characters[professeur_des_animaux_magiques.name] = professeur_des_animaux_magiques
+
+        professeur_de_botanique = Character(
+            "professeur_de_botanique", 
+            "le professeur de botanique avec des gants", 
+            cours_botanique, 
+            [
+                "Je suis le professeur de botanique.",
+                "Aujourd'hui, nous allons replanter des mandragores.",
+                "N'oubliez pas de mettre vos bouchons d'oreilles."
+            ],
+            can_move=False
+        )
         cours_botanique.characters[professeur_de_botanique.name] = professeur_de_botanique
 
-        professeur_de_potion = Character("professeur_de_potion", "le professeur de potion avec une longue cape sombre", cours_potion, ["Je suis le professeur de potion."])
+        professeur_de_potion = Character(
+            "professeur_de_potion", 
+            "le professeur de potions avec une longue cape sombre", 
+            cours_potion, 
+            [
+                "Je suis le professeur de potions.",
+                "Aujourd'hui, nous allons préparer la potion Felix Felicis.",
+                "Ajoutez des crochets d'araignée et des feuilles de mandragore."
+            ],
+            can_move=False
+        )
         cours_potion.characters[professeur_de_potion.name] = professeur_de_potion
-        
-        professeur_de_defance = Character("professeur_de_defance", "le professeur de defance avec un ", cours_de_defance, ["Je suis le professeur de defance."])
-        cours_de_defance.characters[professeur_de_defance.name] = professeur_de_defance
+
+        professeur_de_defense = Character(
+            "professeur_de_defense", 
+            "le professeur de défense avec une longue cape", 
+            cours_de_defense, 
+            [
+                "Je suis le professeur de défense.",
+                "Aujourd'hui, nous allons apprendre le sort 'Stupéfix'.",
+                "Répétez après moi : 'Stupéfix'."
+            ],
+            can_move=False
+        )
+        cours_de_defense.characters[professeur_de_defense.name] = professeur_de_defense
+
+        # Ajouter des étudiants
+        harry = Character(
+            "Harry Potter", 
+            "un étudiant célèbre avec une cicatrice en forme d'éclair", 
+            salle_commune_de_Gryffondor, 
+            [
+                "Salut, je suis Harry Potter.",
+                "Je suis en train de pratiquer des sorts."
+            ],
+            can_move=True
+        )
+        salle_commune_de_Gryffondor.characters[harry.name] = harry
+
+        hermione = Character(
+            "Hermione Granger", 
+            "une étudiante très intelligente", 
+            salle_commune_de_Gryffondor, 
+            [
+                "Bonjour, je suis Hermione Granger.",
+                "Je suis en train de lire un livre de sorts."
+            ],
+            can_move=True
+        )
+        salle_commune_de_Gryffondor.characters[hermione.name] = hermione
+
+        ron = Character(
+            "Ron Weasley", 
+            "un étudiant avec des cheveux roux", 
+            salle_commune_de_Gryffondor, 
+            [
+                "Salut, je suis Ron Weasley.",
+                "Je suis en train de jouer aux échecs sorciers."
+            ],
+            can_move=True
+        )
+        salle_commune_de_Gryffondor.characters[ron.name] = ron
+
+        draco = Character(
+            "Draco Malfoy", 
+            "un étudiant de Serpentard avec une attitude arrogante", 
+            salle_commune_Serpentard, 
+            [
+                "Salut, je suis Draco Malfoy.",
+                "Je suis en train de comploter quelque chose."
+            ],
+            can_move=True
+        )
+        salle_commune_Serpentard.characters[draco.name] = draco
+
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
@@ -170,21 +307,22 @@ class Game:
         # Setup quests
         quest_steps = [
             QuestStep(
-                "Parlez au chpeau dans la salle commune.",
+                "Parlez au chapeau dans la salle commune.",
                 character=chapeau_magique,
                 special_responses=[
-                    "chapeau magique : Bonjour, je suis ici pour que vous choisisait votre maison",
-                    "chapeau magique : quelle maison vouslez vous ?"
+                    "chapeau magique : Bonjour, je suis ici pour que vous choisissiez votre maison.",
+                    "chapeau magique : Quelle maison voulez-vous ?"
                 ],
                 choices=[
                     ["Oui, je veux choisir.", "Non, je suis occupé."],
-                    ["Gryffondor","Serpentard","Serdaigle","Poufsouffle"]
+                    ["Gryffondor", "Serpentard", "Serdaigle", "Poufsouffle"]
                 ],
-                correct_choices=[["Oui, je veux choisir."],[]], #plusieur corect choix-----------------------------------------------------
+                correct_choices=[["Oui, je veux choisir."],
+                                ["Gryffondor", "Serpentard", "Serdaigle", "Poufsouffle"]],
                 reward_item=cape_sombre
             ),
             QuestStep(
-                "assister au cour de magie dans la salle de magie",
+                "Assister au cours de magie dans la salle de magie.",
                 character=professeur_de_magie,
                 special_responses=[
                     "professeur de magie : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
@@ -207,70 +345,70 @@ class Game:
                 reward_item=diplome_de_magie
             ),
             QuestStep(
-                "assister au cour de botanique dans la salle de botanique",
+                "Assister au cours de botanique dans la salle de botanique.",
                 character=professeur_de_botanique,
                 special_responses=[
                     "professeur de botanique : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
-                    "professeur de botanique : pour faire replanter une mandragore il faut l'arracher d'un coup sec en mettant vos bouchon d'oreil",
-                    "professeur de botanique : il faut la placer dans le nouveau pot et remborée avec de la terre"
+                    "professeur de botanique : Pour replanter une mandragore, il faut l'arracher d'un coup sec en mettant vos bouchons d'oreilles.",
+                    "professeur de botanique : Placez ensuite la mandragore dans le nouveau pot et remblayez avec de la terre."
                 ],
                 choices=[
                     ["Oui, je suis prêt.", "Non, pas maintenant."],
-                    ["arracher la plante", "mettre ses bouchon d'oreil et arracher la plante", "mettre ses bouchon d'oreil"],
-                    ["mettre la mandragore dans un pot et rajouter du fumier", "mettre la mandragore dans un pot", "mettre de la terre dans le pot"]
+                    ["Arracher la plante", "Mettre ses bouchons d'oreilles et arracher la plante", "Mettre ses bouchons d'oreilles"],
+                    ["Mettre la mandragore dans un pot et rajouter du fumier", "Mettre la mandragore dans un pot", "Mettre de la terre dans le pot"]
                 ],
                 correct_choices=[
                     ["Oui, je suis prêt."],
-                    ["mettre ses bouchon d'oreil et arracher la plante"],
-                    ["mettre la mandragore dans un pot et rajouter du fumier"]
+                    ["Mettre ses bouchons d'oreilles et arracher la plante"],
+                    ["Mettre la mandragore dans un pot et rajouter du fumier"]
                 ],
                 reward_item=diplome_de_botanique
             ),
             QuestStep(
-                "assister au cour de potion dans la salle de potion",
+                "Assister au cours de potions dans la salle de potions.",
                 character=professeur_de_potion,
                 special_responses=[
-                    "professeur de potion : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
-                    "professeur de potion : pour faire Felix Felicis mettre des crocher d'aregnier",
-                    "professeur de potion : il faut apresant des feuille de mandragore"
+                    "professeur de potions : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur de potions : Pour faire du Felix Felicis, mettez des crochets d'araignée.",
+                    "professeur de potions : Ensuite, ajoutez des feuilles de mandragore."
                 ],
                 choices=[
                     ["Oui, je suis prêt.", "Non, pas maintenant."],
-                    ["mettre de l'eau", "mettre des crocher d'aregnier", "mettre du jus de citrouille"],
-                    ["mettre des feuille de mandragore", "mettre une plume de hibou", "mettre du radi venimeux"]
+                    ["Mettre de l'eau", "Mettre des crochets d'araignée", "Mettre du jus de citrouille"],
+                    ["Mettre des feuilles de mandragore", "Mettre une plume de hibou", "Mettre du radis venimeux"]
                 ],
                 correct_choices=[
                     ["Oui, je suis prêt."],
-                    ["mettre des crocher d'aregnier"],
-                    ["mettre des feuille de mandragore"]
+                    ["Mettre des crochets d'araignée"],
+                    ["Mettre des feuilles de mandragore"]
                 ],
                 reward_item=diplome_de_potion
             ),
             QuestStep(
-                "assister au cour de annimaux magique",
-                character=professeur_des_annimeaux_magique,
+                "Assister au cours d'animaux magiques.",
+                character=professeur_des_animaux_magiques,
                 special_responses=[
-                    "professeur des annimeaux magique : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
-                    "professeur des annimeaux magique : repéré un annimal magique ressanblant a un cheval mais avec une corne sur la tete",
+                    "professeur des animaux magiques : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur des animaux magiques : Repérez un animal magique ressemblant à un cheval mais avec une corne sur la tête.",
                 ],
                 choices=[
                     ["Oui, je suis prêt.", "Non, pas maintenant."],
-                    ["un hippogriffe", "une licorne", "un Phénix"]
+                    ["Un hippogriffe", "Une licorne", "Un phénix"]
                 ],
                 correct_choices=[
                     ["Oui, je suis prêt."],
-                    ["une licorne"]
+                    ["Une licorne"]
                 ],
-                reward_item=diplome_d_annimeaux_magique
+                reward_item=diplome_d_animaux_magiques
             ),
             QuestStep(
-                "assister au cour de defance dans la salle de defance",
-                character=professeur_de_defance,
+                "Assister au cours de défense dans la salle de défense.",
+                character=professeur_de_defense,
                 special_responses=[
-                    "professeur de defance : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
-                    "professeur de defance : Répétez après moi : 'Stupéfix'.",
-                    "professeur de defance : Répétez après moi : 'Protego'.",
-                    "professeur de defance : Répétez après moi : 'Petrificus Totalus'."
+                    "professeur de défense : Bienvenue à Poudlard ! Êtes-vous prêt à apprendre un sort ?",
+                    "professeur de défense : Répétez après moi : 'Stupéfix'.",
+                    "professeur de défense : Répétez après moi : 'Protego'.",
+                    "professeur de défense : Répétez après moi : 'Petrificus Totalus'."
                 ],
                 choices=[
                     ["Oui, je suis prêt.", "Non, pas maintenant."],
@@ -284,7 +422,7 @@ class Game:
                     ["Protego"],
                     ["Petrificus Totalus"]
                 ],
-                reward_item=diplome_de_defance
+                reward_item=diplome_de_defense
             ),
         ]
         main_quest = Quest("La quête principale", "Accomplissez les tâches pour avancer dans l'histoire.", quest_steps)
@@ -294,13 +432,17 @@ class Game:
     def play(self):
         self.setup()
         self.print_welcome()
+        #required_items = [
+        #"diplôme de magie", "diplôme de botanique", "diplôme de potion",
+        #"diplôme d'animaux magiques", "diplôme de defense"
+        #]
+        required_items = [self.quests[0].steps[i].reward_item.name for i in range(len(self.quests[0].steps))]
         # Loop until the game is finished
         while not self.finished:
-            # Get the command from the player
             self.process_command(input("> "))
-            end_message = self.conditions.check_conditions()
+            end_message = self.conditions.check_conditions(required_items)
             if end_message:
-                print(end_message)
+                self.finished = True
         return None
 
     # Process the command entered by the player
@@ -317,7 +459,7 @@ class Game:
                 command = self.commands[command_word]
                 command.action(self, list_of_words, command.number_of_parameters)
                 if command_word != "quit":
-                    #self.move_characters()
+                    self.move_characters()
                     pass
 
     # Print the welcome message
